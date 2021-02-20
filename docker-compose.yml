@@ -1,0 +1,19 @@
+# docker-compose.yml
+version: "3.7"
+services:
+  webapp:
+    ports:
+        - "3000"
+    volumes:
+        - ./src:/var/www
+    environment:
+        - APP_KEY=SomeRandomStringRoAddSecurity123
+        - APP_ENV=development
+        - APP_DEBUG=true
+        - APACHE_RUN_GROUP=apache-www-volume
+        - UNSPLASH_ACCESS_KEY=${UNSPLASH_ACCESS_KEY}
+        - UNSPLASH_SECRET_KEY=${UNSPLASH_SECRET_KEY}
+    build:
+      context: .
+      dockerfile: ./Dockerfile.development
+    image: caneladeouro/semaphore-demo-php-unsplash
